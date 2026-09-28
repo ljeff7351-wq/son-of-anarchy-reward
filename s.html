@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>soa Membership Rewards soa - </title>
+
+  <style>
+    body {
+      margin: 0;
+      background: #0b0b0b;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      background: #000;
+      padding: 30px 15px;
+      text-align: center;
+      border-bottom: 3px solid #a00000;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 30px;
+    }
+
+    .warning {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 15px;
+      background: #332900;
+      border: 1px solid #b99a00;
+      color: #ffe88a;
+      text-align: center;
+      border-radius: 8px;
+    }
+
+    .summary {
+      max-width: 900px;
+      margin: 25px auto;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .summary-box {
+      background: #191919;
+      border: 1px solid #444;
+      padding: 20px 35px;
+      text-align: center;
+      border-radius: 8px;
+    }
+
+    .summary-box strong {
+      display: block;
+      font-size: 30px;
+      color: #e00000;
+      margin-bottom: 5px;
+    }
+
+    .search {
+      max-width: 900px;
+      margin: 25px auto;
+      padding: 0 15px;
+    }
+
+    .search input {
+      width: 100%;
+      padding: 14px;
+      box-sizing: border-box;
+      background: #222;
+      color: white;
+      border: 1px solid #444;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    .table-container {
+      max-width: 900px;
+      margin: 20px auto 50px;
+      padding: 0 15px;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #171717;
+    }
+
+    th {
+      background: #a00000;
+      padding: 14px;
+      text-align: left;
+    }
+
+    td {
+      padding: 13px;
+      border-bottom: 1px solid #333;
+    }
+
+    tr:hover {
+      background: #242424;
+    }
+
+    .reward {
+      font-weight: bold;
+      color: #7cff7c;
+    }
+
+    .scotty {
+      background: #302000;
+    }
+
+    footer {
+      text-align: center;
+      color: #777;
+      padding: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>sons of anarchy MEMBER REWARDS</h1>
+  <p>soa members Website</p>
+</header>
+
+<div class="summary">
+
+  <div class="summary-box">
+    <strong>188</strong>
+    Members
+  </div>
+
+  <div class="summary-box">
+    <strong>$80,000</strong>
+    Scotty Engdah  Reward
+  </div>
+
+</div>
+
+<div class="search">
+  <input
+    type="text"
+    id="searchBox"
+    placeholder="Search member name..."
+    onkeyup="searchMembers()"
+  >
+</div>
+
+<div class="table-container">
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Member Name</th>
+        <th>son of anarchy Reward</th>
+      </tr>
+    </thead>
+
+    <tbody id="memberList"></tbody>
+
+  </table>
+
+</div>
+
+<footer>
+  © 2026 Fictional  Website
+</footer>
+
+<script>
+
+  const specialMember = {
+    name: "Scotty Engdah",
+    reward: 80000
+  };
+
+  const firstNames = [
+    "James", "Michael", "Daniel", "Robert",
+    "David", "John", "William", "Thomas",
+    "Christopher", "Matthew", "Anthony",
+    "Mark", "Steven", "Andrew", "Joseph"
+  ];
+
+  const lastNames = [
+    "Carter", "Brown", "Wilson", "Taylor",
+    "Anderson", "Miller", "Davis", "Thomas",
+    "Moore", "Jackson", "White", "Harris",
+    "Martin", "Thompson", "Walker"
+  ];
+
+  let members = [];
+
+  // Add Scotty first
+  members.push(specialMember);
+
+  // Generate the remaining 187 fictional members
+  for (let i = 1; i < 188; i++) {
+
+    const first =
+      firstNames[Math.floor(Math.random() * firstNames.length)];
+
+    const last =
+      lastNames[Math.floor(Math.random() * lastNames.length)];
+
+    const reward =
+      Math.floor(Math.random() * 75000) + 5000;
+
+    members.push({
+      name: first + " " + last + " #" + i,
+      reward: reward
+    });
+  }
+
+  function displayMembers(list) {
+
+    const table = document.getElementById("memberList");
+
+    table.innerHTML = "";
+
+    list.forEach((member, index) => {
+
+      const row = document.createElement("tr");
+
+      if (member.name === "Scotty Engdah") {
+        row.classList.add("scotty");
+      }
+
+      row.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${member.name}</td>
+        <td class="reward">
+          $${member.reward.toLocaleString()}
+        </td>
+      `;
+
+      table.appendChild(row);
+
+    });
+  }
+
+  function searchMembers() {
+
+    const search =
+      document.getElementById("searchBox")
+      .value
+      .toLowerCase();
+
+    const filtered = members.filter(member =>
+      member.name.toLowerCase().includes(search)
+    );
+
+    displayMembers(filtered);
+  }
+
+  displayMembers(members);
+
+</script>
+
+</body>
+</html>
